@@ -1,0 +1,27 @@
+nameOverride: vllm
+
+image:
+  repository: vllm/vllm-openai
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  name: vllm-svc
+  port: 8000
+
+model:
+  hfId: ""
+  servedName: ""
+  dtype: float16
+  maxModelLen: 256
+
+replicas: 1
+
+nodeSelector: {}
+tolerations: []
+
+resources:
+  limits: {}
+  requests: {}
+
+hfSecretName: hf-secret

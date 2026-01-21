@@ -1,0 +1,26 @@
+nameOverride: vllm
+
+image:
+  repository: vllm/vllm-openai
+  tag: latest
+
+model:
+  hfId: Qwen/Qwen2.5-0.5B-Instruct
+  servedName: Qwen-0.5B
+  dtype: float16
+  maxModelLen: 256
+
+nodeSelector:
+  cloud.google.com/gke-nodepool: gpu-l4
+
+tolerations:
+  - key: "nvidia.com/gpu"
+    operator: "Equal"
+    value: "present"
+    effect: "NoSchedule"
+
+resources:
+  limits:
+    nvidia.com/gpu: "1"
+  requests:
+    nvidia.com/gpu: "1"

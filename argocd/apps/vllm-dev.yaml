@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vllm-dev
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/mlops-laboratory/mlops-lab-on-prem-platform.git
+      targetRevision: main
+      path: charts/vllm
+      helm:
+        valueFiles:
+          - $values/vllm/dev.yaml
+    - repoURL: https://github.com/mlops-laboratory/mlops-lab-on-prem-platform.git
+      targetRevision: main
+      ref: values
+      path: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vllm-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  
