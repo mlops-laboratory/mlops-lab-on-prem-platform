@@ -11,7 +11,7 @@ spec:
       path: charts/vllm
       helm:
         valueFiles:
-          - $values/vllm/dev.yaml
+          - $values/values/vllm/dev.yaml
     - repoURL: https://github.com/mlops-laboratory/mlops-lab-on-prem-platform.git
       targetRevision: main
       ref: values
